@@ -1,4 +1,5 @@
-// and shall return the binary IEEE 754 encoding of this number as a string,
+
+// Write a function that takes a number as parameter,// and shall return the binary IEEE 754 encoding of this number as a string,
 // with fields separated by spaces for readability.
 // ArrayBuffer https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
 // DataView https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView
