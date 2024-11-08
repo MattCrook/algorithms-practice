@@ -18,69 +18,6 @@
 # Output: [8,9,9,9,0,0,0,1]
 #------------------------------------------------#
 
-#----------- CONCISE SOLUTION --------------#
-# class ListNode(object):
-#    def __init__(self, val=0, next=None):
-#        self.val = val
-#        self.next = next
-
-# class Solution_1(object):
-#   def addTwoNumbers(self, l1, l2):
-#       dummy = cur = ListNode(0)
-#       carry = 0
-#       while l1 or l2 or carry:
-#           if l1:
-#               carry += l1.val
-#               l1 = l1.next
-#           if l2:
-#               carry += l2.val
-#               l2 = l2.next
-#           cur.next = ListNode(carry%10)
-#           cur = cur.next
-#           carry //= 10
-#       return dummy.next
-
-
-# solution_1 = Solution_1()
-# print("addTwoNumbers 1: ", solution_1.addTwoNumbers([2,4,3], [5,6,4]))
-# print("addTwoNumbers 2: ", solution_1.addTwoNumbers([0], [0]))
-# print("addTwoNumbers 3: ", solution_1.addTwoNumbers([9,9,9,9,9,9,9], [9,9,9,9]))
-print("--------------------------")
-
-#----------- CONCISE SOLUTION 02 --------------#
-# class Solution_2(object):
-#     def addTwoNumbers(self, l1, l2):
-#         s=""
-#         head1=l1
-#         while head1 is not None:
-#             s=s+str(head1.val)
-#             head1=head1.next
-#         s2=""
-#         head2=l2
-#         while head2 is not None:
-#             s2=s2+str(head2.val)
-#             head2=head2.next
-
-#         n=int(s[::-1])+int(s2[::-1])
-#         j=str(n)
-#         new=None
-#         for i in j[::-1]:
-#             t=ListNode(int(i))
-#             if(new==None):
-#                 new=t
-#                 newhead=new
-#             else:
-#                 newhead.next=t
-#                 newhead=t
-#         return new
-
-# solution_2 = Solution_2()
-# print("addTwoNumbers 1: ", solution_2.addTwoNumbers([2,4,3], [5,6,4]))
-# print("addTwoNumbers 2: ", solution_2.addTwoNumbers([0], [0]))
-# print("addTwoNumbers 3: ", solution_2.addTwoNumbers([9,9,9,9,9,9,9], [9,9,9,9]))
-print("--------------------------")
-
-
 
 
 #---------- LINKED LIST LONGE APPROACH: ---------------#
@@ -148,5 +85,5 @@ l2 = create_linked_list([5, 6, 4])
 # Solve the problem
 solution_3 = Solution_3()
 result = solution_3.addTwoNumbers(l1, l2)
-print("SOLUTION_03 RESULT:")
+print("SOLUTION_03:")
 print_linked_list(result)  # Output: 7 -> 0 -> 8
