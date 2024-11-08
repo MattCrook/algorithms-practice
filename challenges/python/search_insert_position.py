@@ -38,7 +38,7 @@ print("--------------------------")
 
 
 
-# SIMPLE: Using binary search algorithm
+# SIMPLE:
 # O(n) complexity though.
 class Solution(object):
     def searchInsert(self, nums, target):
