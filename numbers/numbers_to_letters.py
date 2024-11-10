@@ -8,7 +8,8 @@ def tuple_slice(startIndex, endIndex, tup):
     return ','.join(map(str,t))
 
 
-print(tuple_slice(1, 4, (76, 34, 13, 64, 12)))
+print("tuple_slice", tuple_slice(1, 4, (76, 34, 13, 64, 12)))
+print("-----------------------------")
 
 
 
@@ -22,27 +23,35 @@ def john_mary(str):
     else:
         return False
 
-print(john_mary('Mary&John'))
+print("john_mary", john_mary('Mary&John'))
+print("-----------------------------")
 
 
 
-def numbers_to_letters(s):
+def numbers_to_letters_1(s):
+    # it = iter(s)
+    # map(''.join, zip(it, it))
+    # map(int, map(''.join, zip(it, it)))
+    # map(lambda n: chr(n + 96) if n < 27 else chr(n), map(int, map(''.join, zip(it, it))))
+    # result = ''.join(map(lambda n : chr(n+96) if n < 27 else chr(n), map(int, map(''.join, zip(it,it)))))
+    # return result
     it = iter(s)
     pairs = zip(it, it)
-    map(''.join, zip(it, it))
-    map(int, map(''.join, zip(it, it)))
-    map(lambda n: chr(n + 96) if n < 27 else chr(n), map(int, map(''.join, zip(it, it))))
-    result = ''.join(map(lambda n : chr(n+96) if n < 27 else chr(n), map(int, map(''.join, zip(it,it)))))
+    map_its = map(''.join, pairs)
+    map_pairs = map(int, map_its)
+    l_to_n = map(lambda n: chr(n + 96) if n < 27 else chr(n), map_pairs)
+    result = ''.join(l_to_n)
     return result
 
 if __name__ == "__main__":
-    print(numbers_to_letters('20 5 19 20+4 15 13 5'))
+    print("numbers_to_letters_1", numbers_to_letters_1('20 5 19 20+4 15 13 5'))
+print("-----------------------------")
 
 
 
 
 
-def numbers_to_letters(s):
+def numbers_to_letters_2(s):
     it = iter(s)
     pairs = zip(it, it)
     if '+' in str(pairs):
@@ -60,11 +69,13 @@ def numbers_to_letters(s):
 
     return "".join(res)
 if __name__ == "__main__":
-    print(numbers_to_letters('20 5 19 20+4 15 13 5'))
+    print("numbers_to_letters_2", numbers_to_letters_2('20 5 19 20+4 15 13 5'))
+print("-----------------------------")
 
 
-def numbers_to_letters(s):
+def numbers_to_letters_3(s):
     for x, y in zip(range(1, 27), string.ascii_lowercase):
         print(x, y)
 
-print(numbers_to_letters('20 5 19 20+4 15 13 5'))
+print("numbers_to_letters_3", numbers_to_letters_3('20 5 19 20+4 15 13 5'))
+print("-----------------------------")
