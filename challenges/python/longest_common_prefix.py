@@ -152,3 +152,30 @@ solution_3 = Solution3()
 print("solution_3", solution_3.longestCommonPrefix(strs1))
 print("solution_3", solution_3.longestCommonPrefix(strs2))
 print("--------------------------------")
+
+
+class FindLongestCommonPrefix(object):
+  def findLongestCommonPrefix(self, strings):
+      #common_prefix = []
+      if len(strings) == 0:
+          return ""
+      prefix = strings[0]
+      for word in strings[1:]:
+          while not word.startswith(prefix):
+              prefix = prefix[:-1]
+          if not prefix:
+              return ""
+      #common_prefix.append(prefix)
+      #return common_prefix
+      return prefix
+
+  def returnList(self, strings):
+      common_prefix = []
+      longestCommonPrefix = self.findLongestCommonPrefix(strings)
+      common_prefix.append(longestCommonPrefix)
+      return common_prefix
+
+
+findLongestCommonPrefix = FindLongestCommonPrefix()
+print("Return List", findLongestCommonPrefix.returnList(strs1))
+print("--------------------------------")

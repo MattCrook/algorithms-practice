@@ -21,16 +21,14 @@ class DoBinarySearch(object):
     return -1
 
 solution_1 = DoBinarySearch()
-print(solution_1.do_search(primes, 73)) # 20
+print("solution_1", solution_1.do_search(primes, 73)) # 20
 print("--------------------------")
 
 
 
 
 class DoBinarySearchRecursion(object):
-  def do_search_recursion(self,input_list, target, min, max):
-    #min = 0
-    #max = len(input_list) - 1
+  def do_search_recursion(self, input_list, target, min, max):
     if min > max:
       return -1
     # finding middle of list by getting average.
@@ -52,27 +50,74 @@ class DoBinarySearchRecursion(object):
 
 
 solution_2 = DoBinarySearchRecursion()
-print(solution_2.do_search_recursion(primes, 73, 0, len(primes) - 1)) # 20
+print("solution_2", solution_2.do_search_recursion(primes, 73, 0, len(primes) - 1)) # 20
+print("solution_2", solution_2.do_search_recursion(primes, 79, 0, len(primes) - 1)) # 20
 print("--------------------------")
 
 
 
-# Do without passing in a min and max
-# (WIP - todo)
-def do_search_recursion_2(input_list, target):
-  min = 0
-  max = len(input_list) - 1
-  if min > max:
+# Put it all together in one Class
+class BinarySearch(object):
+  def binarySearch(self, input_list, target):
+    min = 0
+    max = len(input_list) - 1
+    guess = 0
+    while min <= max:
+      guess = math.floor((min + max) // 2)
+      if input_list[guess] == target:
+        return guess
+      if input_list[guess] < target:
+        min = guess + 1
+      elif input_list[guess] > target:
+        max = guess - 1
     return -1
-  middle = math.floor((min + max) // 2)
-  if input_list[middle] == target:
-    return middle
-  if input_list[middle] > target:
-    new_input_list = range(input_list[min], input_list[middle - 1])
-    return do_search_recursion_2(new_input_list, target)
-  if input_list[middle] < target:
-    new_input_list = range(input_list[middle + 1], input_list[max])
-    return do_search_recursion_2(new_input_list, target)
 
-# print("recursion", do_search_recursion_2(primes, 73))
+  def binarySearchRecursion(self, input_list, target, min, max):
+    if min > max:
+      return -1
+    guess = math.floor((min + max) // 2)
+    if input_list[guess] == target:
+      return guess
+    if input_list[guess] < target:
+      return self.binarySearchRecursion(input_list, target, guess + 1, max)
+    if input_list[guess] > target:
+      return self.binarySearchRecursion(input_list, target, min, guess - 1)
+
+
+
+binarySearch = BinarySearch()
+print("binarySearchClass", binarySearch.binarySearch(primes, 7))
+print("binarySearchClass", binarySearch.binarySearchRecursion(primes, 7, 0, len(primes) - 1))
 print("--------------------------")
+
+
+
+# # Todo: Do without passing in a min and max?
+# def do_search_recursion_4(input_list, target):
+#   min = 0
+#   max = len(input_list) - 1
+
+#   if min > max:
+#     return -1
+
+#   guess = math.floor((min + max) // 2)
+
+#   if input_list[guess] == target:
+#     return guess
+
+#   if input_list[guess] > target:
+#     # if guess is greater than target, dont need anything above guess, so max becomes guess - 1
+#     new_input_list = input_list[0:guess - 1] # slicing list by starting at min, then stopping at guess, b/c we know we dont want anything above guess.
+#     return do_search_recursion_4(new_input_list, target)
+
+#   if input_list[guess] < target:
+#     # if guess is less than target, dont need anything below guess, so min becomes guess + 1
+#     new_input_list = input_list[guess + 1:len(input_list) - 1] # slicing list by starting at guess, and continuing to max b/c we know we don't want anything below guess.
+#     return do_search_recursion_4(new_input_list, target)
+
+
+
+# print("do_search_recursion_4", do_search_recursion_4(primes, 31))
+# print("do_search_recursion_4", do_search_recursion_4(primes, 73))
+# print("do_search_recursion_4", do_search_recursion_4(primes, 79))
+# print("--------------------------")
