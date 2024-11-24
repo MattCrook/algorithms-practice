@@ -2,16 +2,16 @@
 
 
 class Solution:
-    def diagonalSum(self, mat):
-        res = 0
-        for i in range(len(mat)):
-            res = res + mat[i][i] + mat[i][~i]
+    def diagonalSum(self, matrix):
+        result = 0
+        for i in range(len(matrix)):
+            result = result + matrix[i][i] + matrix[i][~i]
 
-        if (len(mat)) % 2:
-            mid = len(mat)//2
-            res -= mat[mid][mid]
+        if (len(matrix)) % 2:
+            mid = len(matrix)//2
+            result -= matrix[mid][mid]
 
-        return res
+        return result
 
 s = Solution()
 matrix = [

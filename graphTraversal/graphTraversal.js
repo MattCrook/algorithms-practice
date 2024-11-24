@@ -40,7 +40,37 @@ airports.forEach(addNode);
 routes.forEach((route) => addEdge(...route));
 
 console.log("adjacencyList: ", adjacencyList);
+//-----------------------------------------//
+//-----------------------------------------//
+/*
+// Can also (might be better) to encapsulate in a function. For Example:
+function addNode(graph, airport) {
+  graph.set(airport, []);
+}
 
+function addEdge(graph, origin, destination) {
+  // (this called while looping through routes)
+  // gets the matching route origin to airports, and adds the destination.
+  // Gets the matching destination in route tp airports, and adds origin.
+  graph.get(origin).push(destination);
+  graph.get(destination).push(origin);
+}
+
+// create new Map here in function rather than globally and return it.
+function createGraph(airports, routes) {
+  const graph = new Map();
+  airports.forEach((airport) => addNode(graph, airport));
+  routes.forEach((route) => addEdge(graph, ...route));
+  return graph;
+}
+
+const adjacencyListMatrix = createGraph(airports, routes);
+console.log("adjacencyListMatrix: ", adjacencyListMatrix);
+*/
+
+
+//-----------------------------------------//
+//-----------------------------------------//
 // Graph search or traversal...Breadth First Search
 const bfs = (start) => {
   // value in set may only occur once. We do this to prevent an infinite loop which would happen of this line was not here.
