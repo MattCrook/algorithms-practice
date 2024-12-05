@@ -23,3 +23,6 @@ coverage.xml
 Pipfile.lock
 
 __pypackages__/
+
+practice.js
+practice.py
