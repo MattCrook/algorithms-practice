@@ -26,14 +26,17 @@
 # #------------------------------------------------
 */
 
+/*
+# Solution 2
+- Two Sum Using the two-pointer method.
+*/
 function twoSumTwoPointer(numbers, target) {
   let left = 0;
   let right = numbers.length - 1;
   while (left < right) {
     let sum = numbers[left] + numbers[right];
     if (sum === target) {
-      //return induces added by 1 (per instructions)
-      return [left + 1, right + 1];
+      return [left + 1, right + 1]; //return induces added by 1 (per instructions)
     }
     if (sum < target) {
       left = left + 1;
@@ -46,4 +49,26 @@ function twoSumTwoPointer(numbers, target) {
 console.log(twoSumTwoPointer([2, 7, 11, 15], 9));
 console.log(twoSumTwoPointer([2, 3, 4], 6));
 console.log(twoSumTwoPointer([-1, 0], -1));
+console.log("---------------------");
+
+/*
+# Solution 2
+- Two Sum Using an Object (dictionary)
+- to store values we've already calculated (memoization)
+*/
+const twoSumDictionary = (numbers, target) => {
+  const dict = {};
+  for (let i = 0; i < numbers.length; i++) {
+    const num = numbers[i];
+    const compliment = target - num;
+    if (compliment in dict) {
+      return [dict[compliment] + 1, i + 1]; //return induces added by 1 (per instructions)
+    }
+    dict[num] = i;
+  }
+};
+
+console.log(twoSumDictionary([2, 7, 11, 15], 9));
+console.log(twoSumDictionary([2, 3, 4], 6));
+console.log(twoSumDictionary([-1, 0], -1));
 console.log("---------------------");

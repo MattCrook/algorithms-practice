@@ -19,6 +19,29 @@
 #------------------------------------------------#
 
 
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        num_map = {}
+
+        for i, num in enumerate(nums):
+            compliment = target - num
+
+            if compliment in num_map:
+                return [num_map[compliment], i]
+
+            num_map[num] = i
+
+
+solution_class = Solution()
+print("solution: ", solution_class.twoSum([2,7,11,15], 9))
+print("solution: ", solution_class.twoSum([3,2,4], 6))
+print("solution: ", solution_class.twoSum([3,3], 6))
+print("--------------------------")
 
 def two_sum(nums, target):
     # Dictionary to store the number and its index
@@ -78,29 +101,4 @@ two_sum.add(15)     # Add number 15 to the map
 
 result = two_sum.find(9)  # Try to find two numbers that sum to 9
 print("TwoSum Class:", result)  # Output: [2, 7]
-print("--------------------------")
-
-
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        num_map = {}
-
-        for i, num in enumerate(nums):
-            compliment = target - num
-
-            if compliment in num_map:
-                return [num_map[compliment], i]
-
-            num_map[num] = i
-
-
-solution_class = Solution()
-print("solution: ", solution_class.twoSum([2,7,11,15], 9))
-print("solution: ", solution_class.twoSum([3,2,4], 6))
-print("solution: ", solution_class.twoSum([3,3], 6))
 print("--------------------------")

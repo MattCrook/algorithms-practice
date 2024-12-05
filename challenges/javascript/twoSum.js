@@ -20,11 +20,38 @@
 ------------------------------------------------
 */
 
-const twoSum = (nums, target) => {
+// Using HASHMAP solution
+function twoSumHashmap(numbers, target) {
+  const numberPairIds = {};
 
+  for (let i = 0; i < numbers.length; i++) {
+    const num = numbers[i];
+    const compliment = target - num;
+    if (compliment in numberPairIds) {
+      return [i, numberPairIds[compliment]];
+    }
+    numberPairIds[num] = i;
+  }
 }
 
-print("solution: ", twoSum([2,7,11,15], 9))
-print("solution: ", twoSum([3,2,4], 6))
-print("solution: ", twoSum([3,3], 6))
-print("--------------------------")
+console.log("solution: ", twoSumHashmap([2, 7, 11, 15], 9));
+console.log("solution: ", twoSumHashmap([3, 2, 4], 6));
+console.log("solution: ", twoSumHashmap([3, 3], 6));
+console.log("--------------------------");
+
+
+const twoSum = (nums, target) => {
+  const n = {}
+  for (let i in nums) {
+    const number = nums[i];
+    if (target - number in n) {
+      return [i, n[target - number]]
+    }
+    n[number] = i;
+  }
+}
+
+console.log(twoSum([2, 7, 11, 15], 9));
+console.log(twoSum([3, 2, 4], 6));
+console.log(twoSum([3, 3], 6));
+console.log("--------------------------");
