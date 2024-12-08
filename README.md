@@ -5,7 +5,7 @@ Collection of coding algorithms and data structures, written in Javascript and P
 ----
 
 ##### This repository coincides with my blog post on this subject. Please refer to that for more in depth details and explanation of various algorithms:
-* ##### [https://matt-crook.com/blog_posts/algorithms](https://matt-crook.com/blog_posts)
+* ##### [https://matt-crook.com/blog_posts/algorithms](https://matt-crook.com/blog_posts/algorithms)
 
 ----
 
