@@ -1,14 +1,89 @@
-#########################################################
-# Create an efficient circular buffer in python (with the goal of taking averages of the integer values in the buffer)
+#------------------------------------------------#
+# Additional Circular Buffer Solution. (other than what is in /challenges/python/circular_buffer.py)
 
-# FOR MOR SULUTIONS and DETAILS, SEE:
-#  - https://github.com/MattCrook/algorithms-practice/circularBuffer
+# it's the nice batteries included way....use collections.deque with a maxlen arg
+# https://docs.python.org/3/library/collections.html#deque-recipes
+# import collections
+# d = collections.deque(maxlen=10)
+# d
+# deque([], maxlen=10)
+# for i in xrange(20):
+#   d.append(i)
+# deque([10, 11, 12, 13, 14, 15, 16, 17, 18, 19], maxlen=10)
+#------------------------------------------------#
+import numpy
+import timeit
+import collections
 
-#########################################################
+class CircularBuffer(object):
+    buffer_methods = ('list', 'deque', 'roll')
+
+    def __init__(self, buffer_size, buffer_method):
+        self.content = None
+        self.size = buffer_size
+        self.method = buffer_method
+        self.update = getattr(self, '_update_' + buffer_method)
+
+    def _update_list(self, scalar):
+        try:
+            # shift
+            self.content.append(scalar)
+            self.content.pop(0)
+        except AttributeError:
+            # init
+            self.content = [0.] * self.size
+
+    def _update_deque(self, scalar):
+        try:
+            # shift
+            self.content.append(scalar)
+        except AttributeError:
+            # init
+            self.content = collections.deque([0.] * self.size, maxlen=self.size)
+
+    def _update_roll(self, scalar):
+        try:
+            # shift
+            self.content = numpy.roll(self.content, -1)
+            self.content[-1] = scalar
+        except IndexError:
+            # init
+            self.content = numpy.zeros(self.size, dtype=float)
+
+
+# Testing and Timing
+circular_buffer_size = 100
+circular_buffers = [
+    CircularBuffer(buffer_size=circular_buffer_size, buffer_method=method)
+    for method in CircularBuffer.buffer_methods
+]
+timeit_iterations = 1e4
+timeit_setup = 'from __main__ import circular_buffers'
+timeit_results = []
+for i, cb in enumerate(circular_buffers):
+    # We add a convenient number of convenient values (see equality test below)
+    code = '[circular_buffers[{}].update(float(j)) for j in range({})]'.format(
+        i, circular_buffer_size
+    )
+    # Testing
+    eval(code)
+    buffer_content = [item for item in cb.content]
+    assert buffer_content == list(range(circular_buffer_size))
+    # Timing
+    timeit_results.append(
+        timeit.timeit(code, setup=timeit_setup, number=int(timeit_iterations))
+    )
+    print(
+        '{}: total {:.2f}s ({:.2f}ms per iteration)'.format(
+            cb.method,
+            timeit_results[-1],
+            timeit_results[-1] / timeit_iterations * 1e3,
+        )
+    )
 
 
 #------------------------------------------------------#
-# SOLUTION 1 (More Simple Solution)
+# SOLUTION 2 (More Simple Solution)
 # Key Operations for a Circular Buffer:
 #  - Write (Insert new data into the buffer).
 #  - Read (Retrieve data from the buffer).
@@ -26,7 +101,6 @@
 # - If the buffer is full and you write new data, it overwrites the oldest data.
 # - If the buffer is empty and you try to read, it returns None.
 #------------------------------------------------------#
-
 class CircularBuffer:
     def __init__(self, size):
         self.size = size            # Size of the buffer
@@ -109,12 +183,10 @@ print(cb)  # Buffer: [60, 20, 30, 40, 50]
 # Overwriting the oldest data (10) after full buffer
 cb.write(70)
 print(cb)  # Buffer: [60, 70, 30, 40, 50]
-print("--------------------------")
-
 
 
 #-------------------------------------------------------------------------------#
-# SOLUTION 2 (Additional Solution)
+# SOLUTION 3 (Additional Simple Solution)
 # From Github:
 # - https://github.com/heineman/python-data-structures/blob/master/2.%20Ubiquitous%20Lists/circBuffer.py
 #-------------------------------------------------------------------------------#
@@ -185,4 +257,3 @@ if __name__=='__main__':
     cb.add(7); cb.add(8); cb.add(9); cb.add(10)
     print(cb.__repr__())
     print("_len__:", cb.__len__())
-print("--------------------------")

@@ -1,13 +1,11 @@
 # Data Structures and Algorithms
 
-Collection of coding algorithms and data structures, written in Javascript and Python. 
-
-As well as problems / challenges using these algorithms (***See [challenges Readme](./challenges/README.md)***). Formatted in what you might see in LeetCode or interview questions.
+Collection of coding algorithms and data structures, written in Javascript and Python, as well as problems / challenges using these algorithms (***See [challenges Readme](./challenges/README.md)***). Formatted in what you might see in LeetCode or interview questions.
 
 ----
 
-##### For more in depth details and explanation of various algorithms, please see my blog post on this subject:
-* [https://matt-crook.com/blog_posts/algorithms](https://matt-crook.com/blog_posts)
+##### This repository coincides with my blog post on this subject. Please refer to that for more in depth details and explanation of various algorithms:
+* ##### [https://matt-crook.com/blog_posts/algorithms](https://matt-crook.com/blog_posts)
 
 ----
 
@@ -26,6 +24,7 @@ As well as problems / challenges using these algorithms (***See [challenges Read
 * Binary Search Algorithm
 * Circular Buffer Algorithms
 * and more...
+* [Challenges](./challenges/)
 
 ### Extra/ Random / Docs:
 ##### Python:
@@ -35,7 +34,7 @@ As well as problems / challenges using these algorithms (***See [challenges Read
 
 <br>
 
-## Graph Search (BFS and DFS)
+<!-- ## Graph Search (BFS and DFS)
 
 [Challenge Example](./challenges/javascript/adjancencyMatrix.js)
 
@@ -108,7 +107,10 @@ One place are often used in breadth-first search, or an implementing a cache. In
 *(https://levelup.gitconnected.com/java-hashmap-explained-a601c48ddc44)*
 
 [Example Python](./challenges/python/hashmap_ransomNote.py)
+
 [Example Javascript](./challenges/javascript/hashmapRansomNote.js)
+
+[Example Two Sum](./challenges/javascript/twoSum.js)
 
 A HashMap or Hash Table is a data structure that maps keys to values for highly efficient lookups. There are a number of ways of implementing this.
 A simple implementation is we can use an array of linked lists, and a hash code function.
@@ -130,9 +132,15 @@ A Linked List is a data structure that represents a sequence of nodes. In a sing
 
 [Examples](./fibonacci/)
 
+The Fibonacci sequence is the series of numbers where each number is the sum of the two preceding numbers. It starts with 0 and is followed by 1.
+
 
 <br>
 
 ## Circular Buffer
 
+[Examples](./circularBuffer/)
+
 [Challenge Example](./challenges/python/circlular_buffer.py)
+
+A a circular buffer (or circular queue, cyclic buffer or ring buffer) is a data structure that uses a single, fixed-size buffer as if it were connected end-to-end. This structure lends itself easily to buffering data streams. The useful property of a circular buffer is that it does not need to have its elements shuffled around when one is consumed. -->
