@@ -143,11 +143,11 @@ class CircularBuffer:
     def add(self, value):
         """Adds value to buffer, overwrite as needed."""
         if self.isFull():
-            self.low = (self.low+1) % self.size
+            self.low = (self.low+1) % self.size # Modulus (returns the remainder of a division operation)
         else:
             self.count += 1
         self.buffer[self.high] = value
-        self.high = (self.high + 1) % self.size
+        self.high = (self.high + 1) % self.size # Modulus (returns the remainder of a division operation)
 
     def remove(self):
         """Removes oldest value from non-empty buffer."""

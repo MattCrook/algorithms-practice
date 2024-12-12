@@ -39,3 +39,4 @@ print(queue.peek()) # 3
 queue.add(5)
 print(queue.peek_whole_queue()) # [3, 5]
 print(queue.size()) # 2
+print('--------------------')
