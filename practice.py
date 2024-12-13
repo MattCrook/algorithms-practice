@@ -1,41 +1,42 @@
-# Queue (FIFO) - Last in First Out
+"""
+Given a sorted array of numbers, determine if a number exists.
 
-class Queue:
-  def __init__(self):
-    self.items = []
+Input : sorted = [0, 1, 1, 2, 5, 7, 9, 9, 10], find if these exist [5, 3, 8, 7]
+Output: [y, n, n, y]
 
-  def add(self, item):
-    self.items.append(item)
+[0, 1, 1, 2, 5, 7, 9, 9, 10], 5
+min = 0, max = 8, guess = 4
+nums[4] = 5 == 5 --> y
 
-  def remove(self):
-    if self.isEmpty():
-      print("queue is empty")
-    self.items.remove(self.items[0])
-
-  def isEmpty(self):
-    return len(self.items) == 0
-
-  def peek(self):
-    if self.isEmpty():
-      print("queue is empty")
-    return self.items[0]
-
-  def peek_whole_queue(self):
-    if self.isEmpty():
-      print("queue is empty")
-    return self.items
-
-  def size(self):
-    return len(self.items)
+[0, 1, 1, 2, 5, 7, 9, 9, 10], 3
+min = 0, max = 8, guess = 4
+nums[4] = 5 == 3 --> ??
+"""
 
 
-queue = Queue()
-queue.add(1)
-queue.add(3)
-print(queue.isEmpty()) # false
-print(queue.peek()) # 1
-queue.remove()
-print(queue.peek()) # 3
-queue.add(5)
-print(queue.peek_whole_queue()) # [3, 5]
-print(queue.size()) # 2
+
+
+def doBinarySearch(sorted_list, search_list):
+    results = []
+    for target in search_list:
+      # if target not in sorted_list:
+      #   results.append("n")
+      # else:
+        min = 0
+        max = len(sorted_list) - 1
+        while min <= max:
+          middle = (min + max) // 2
+          if sorted_list[middle] == target:
+            results.append("y")
+          if sorted_list[middle] < target:
+            min = middle + 1
+          if sorted_list[middle] > target:
+            max = middle - 1
+
+        results.append("n")
+
+    return results
+
+
+#print(doBinarySearch([0, 1, 1, 2, 5, 7, 9, 9, 10], [5, 3, 8, 7]))
+print("--------------")

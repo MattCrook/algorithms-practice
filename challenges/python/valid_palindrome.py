@@ -159,7 +159,7 @@ def findPalindrome(string):
     return results
 
 
-#print(findPalindrome("A man, a plan, a canal: Panama"))
+print(findPalindrome("A man, a plan, a canal: Panama"))
 
 
 #--------------------#

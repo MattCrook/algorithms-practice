@@ -61,13 +61,13 @@ print("--------------------------")
 class Solution(object):
     def searchInsert(self, nums, target):
         length = 0
-        range = len(nums) - 1
-        while length <= range:  # With the while loop we can execute a set of statements as long as a condition is true.
-            mid = (length + range) // 2  # getting the middle of where we are in the list
+        r = len(nums) - 1
+        while length <= r:  # With the while loop we can execute a set of statements as long as a condition is true.
+            mid = (length + r) // 2  # getting the middle of where we are in the list
             if nums[mid] < target:  # if the value of mid (middle) is less than the target, then increment length. (shifting it right) (we know if won't be anything less than that in the list so can get rid of all those numbers.)
                 length = mid + 1
             elif nums[mid] > target: # if value of mid is less than target, then decrement the range. (shifting left, so while length < range, decreases range, removes all options above that mid.)
-                range = mid - 1
+                r = mid - 1
             else:
                 return mid # else we landed on the target
         return length # return ENDING length, which will be the position where target WOULD be if in the list.
