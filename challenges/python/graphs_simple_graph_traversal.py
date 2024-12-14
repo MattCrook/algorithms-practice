@@ -54,7 +54,7 @@ def BFS(graph, start):
   queue = [start]
   while len(queue) > 0:
     node = queue.pop(0)
-    current_node = graph.get(node)
+    #current_node = graph.get(node)
     if node not in visited:
       # Process the node (Here, just print it)
       print(node, end=" ")
