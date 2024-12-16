@@ -62,7 +62,7 @@ for edge in node_connections:
   adjacencyList.get(edge[0]).append(edge[1])
   adjacencyList.get(edge[1]).append(edge[0])
 
-print(adjacencyList)
+print("Adj List: ", adjacencyList)
 
 
 #-------- Breadth-First Search (BFS) --------------#
@@ -103,8 +103,8 @@ def bfs(graph, start):
 
 print("BFS Traversal:")
 bfs(graph, 'A')  # Output: A B C D E F
-# bfs(graph, 'B')  # Output: B A D E C F
-# bfs(graph, 'F')  # Output: F C A B D E
+bfs(graph, 'B')  # Output: B A D E C F
+bfs(graph, 'F')  # Output: F C A B D E
 print("--------------------")
 
 
@@ -135,7 +135,11 @@ def dfs(graph, node, visited=None):
             if neighbor not in visited:
                 dfs(graph, neighbor, visited)
 
-# Example usage:
+
+# NOTICE, how diff than bfs. You can see here it went "down" to node's children before
+# "backtracking" to node's neighbor.
 print("DFS Traversal:")
 dfs(graph, 'A')  # Output: A B D E C F
+dfs(graph, 'B')  # Output: B A C F D E
+dfs(graph, 'F')  # Output: F C A B D E
 print("--------------------")

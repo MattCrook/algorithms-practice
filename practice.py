@@ -26,6 +26,14 @@ Example 1.
 
 
 """
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D', 'E'],
+    'C': ['A', 'F'],
+    'D': ['B'],
+    'E': ['B'],
+    'F': ['C']
+}
 
 nodes = ['A', 'B', 'C', 'D', 'E', 'F']
 node_connections = [
@@ -37,16 +45,16 @@ node_connections = [
 ]
 
 
-adjacencyList = dict()
-for node in nodes:
-  adjacencyList[node] = []
+# adjacencyList = dict()
+# for node in nodes:
+#   adjacencyList[node] = []
 
-for edge in node_connections:
-  adjacencyList.get(edge[0]).append(edge[1])
-  adjacencyList.get(edge[1]).append(edge[0])
+# for edge in node_connections:
+#   adjacencyList.get(edge[0]).append(edge[1])
+#   adjacencyList.get(edge[1]).append(edge[0])
 
-print("Graph: ", adjacencyList)
-print("---------------")
+# print("Graph: ", adjacencyList)
+# print("---------------")
 
 
 def BFS(graph, start):
@@ -64,9 +72,24 @@ def BFS(graph, start):
         queue.append(neighbor)
 
 print("BFS Traversal:")
-BFS(adjacencyList, 'A')  # Output: A B C D E F
+BFS(graph, 'A')  # Output: A B C D E F
 print("---")
-BFS(adjacencyList, 'B')  # Output: B A D E C F
+BFS(graph, 'B')  # Output: B A D E C F
 print("---")
-BFS(adjacencyList, 'F')  # Output: F C A B D E
+BFS(graph, 'F')  # Output: F C A B D E
 print("---------------")
+
+
+def DFS(graph, node, visited=None):
+  if visited is None:
+    visited = set()
+  if node not in visited:
+    print(node)
+    visited.add(node)
+  for neighbor in graph[node]:
+    if neighbor not in visited:
+      DFS(graph, neighbor, visited)
+
+print(DFS(graph, 'A'))
+    
+  

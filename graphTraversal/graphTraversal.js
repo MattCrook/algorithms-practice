@@ -105,7 +105,6 @@ then back track to top of graph and repeat.
 */
 
 const dfs = (start, visited = new Set()) => {
-  //console.log("START",start);
   visited.add(start);
   const destinations = adjacencyList.get(start);
 
@@ -126,7 +125,6 @@ const dfs = (start, visited = new Set()) => {
 dfs("PHX");
 
 function dfs2(start, visited = new Set()) {
-  //console.log(start)
   visited.add(start);
   const destinations = adjacencyList.get(start);
 
