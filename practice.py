@@ -26,23 +26,23 @@ Example 1.
 
 
 """
-graph = {
-    'A': ['B', 'C'],
-    'B': ['A', 'D', 'E'],
-    'C': ['A', 'F'],
-    'D': ['B'],
-    'E': ['B'],
-    'F': ['C']
-}
+# graph = {
+#     'A': ['B', 'C'],
+#     'B': ['A', 'D', 'E'],
+#     'C': ['A', 'F'],
+#     'D': ['B'],
+#     'E': ['B'],
+#     'F': ['C']
+# }
 
-nodes = ['A', 'B', 'C', 'D', 'E', 'F']
-node_connections = [
-  ['A', 'B'],
-  ['A', 'C'],
-  ['B', 'D'],
-  ['B', 'E'],
-  ['C', 'F']
-]
+# nodes = ['A', 'B', 'C', 'D', 'E', 'F']
+# node_connections = [
+#   ['A', 'B'],
+#   ['A', 'C'],
+#   ['B', 'D'],
+#   ['B', 'E'],
+#   ['C', 'F']
+# ]
 
 
 # adjacencyList = dict()
@@ -57,39 +57,104 @@ node_connections = [
 # print("---------------")
 
 
-def BFS(graph, start):
+# def BFS(graph, start):
+#   visited = set()
+#   queue = [start]
+#   while len(queue) > 0:
+#     node = queue.pop(0)
+#     current_node = graph.get(node)
+#     if node not in visited:
+#       # Process the node (Here, just print it)
+#       print(node, end=" ")
+#       visited.add(node)
+#     for neighbor in graph[node]:
+#       if neighbor not in visited:
+#         queue.append(neighbor)
+
+# print("BFS Traversal:")
+# BFS(graph, 'A')  # Output: A B C D E F
+# print("---")
+# BFS(graph, 'B')  # Output: B A D E C F
+# print("---")
+# BFS(graph, 'F')  # Output: F C A B D E
+# print("---------------")
+
+
+# def DFS(graph, node, visited=None):
+#   if visited is None:
+#     visited = set()
+#   if node not in visited:
+#     print(node)
+#     visited.add(node)
+#   for neighbor in graph[node]:
+#     if neighbor not in visited:
+#       DFS(graph, neighbor, visited)
+
+# print(DFS(graph, 'A'))
+
+
+
+
+
+
+
+
+
+
+
+
+nodes = ['A', 'B', 'C', 'D', 'E', 'F']
+edges = [
+  ['A', 'B'],
+  ['A', 'C'],
+  ['B', 'D'],
+  ['B', 'E'],
+  ['C', 'F']
+]
+
+
+graph = dict()
+
+for n in nodes:
+  graph[n] = []
+
+for e in edges:
+  graph.get(e[0]).append(e[1])
+  graph.get(e[1]).append(e[0])
+
+#print(graph)
+# {
+#   'A': ['B', 'C'],
+#   'B': ['A', 'D', 'E'],
+#   'C': ['A', 'F'],
+#   'D': ['B'],
+#   'E': ['B'],
+#   'F': ['C']
+# }
+  
+def bfs(g, start):
   visited = set()
   queue = [start]
   while len(queue) > 0:
     node = queue.pop(0)
-    current_node = graph.get(node)
     if node not in visited:
-      # Process the node (Here, just print it)
       print(node, end=" ")
       visited.add(node)
-    for neighbor in graph[node]:
+    for neighbor in g[node]:
       if neighbor not in visited:
         queue.append(neighbor)
 
-print("BFS Traversal:")
-BFS(graph, 'A')  # Output: A B C D E F
-print("---")
-BFS(graph, 'B')  # Output: B A D E C F
-print("---")
-BFS(graph, 'F')  # Output: F C A B D E
-print("---------------")
+print(bfs(graph, 'A'))
 
 
-def DFS(graph, node, visited=None):
+def dfs(graph, node, visited=None):
   if visited is None:
     visited = set()
   if node not in visited:
-    print(node)
+    print(node, end=" ")
     visited.add(node)
   for neighbor in graph[node]:
     if neighbor not in visited:
-      DFS(graph, neighbor, visited)
+      dfs(graph, neighbor, visited)
 
-print(DFS(graph, 'A'))
-    
-  
+print(dfs(graph, 'A'))

@@ -1,4 +1,5 @@
 //------------------------------------------------------------//
+// Stack => LIFO
 // Basic Stack Data Structure using an Array to hold items in the stack.
 /*
 Explanation:

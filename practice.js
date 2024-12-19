@@ -24,3 +24,64 @@ Example 1.
 # Input A
 # Output: A B C D E F
 */
+
+const nodes = ["A", "B", "C", "D", "E", "F"];
+const edges = [
+  ["A", "B"],
+  ["A", "C"],
+  ["B", "D"],
+  ["B", "E"],
+  ["C", "F"],
+];
+
+const graph = new Map();
+
+nodes.forEach((node) => {
+  graph.set(node, []);
+});
+
+edges.forEach((edge) => {
+  graph.get(edge[0]).push(edge[1]);
+  graph.get(edge[1]).push(edge[0]);
+});
+
+console.log("Adjacency List:");
+console.log(graph);
+
+const bfs = (graph, start) => {
+  const visited = new Set();
+  const queue = [start];
+  while (queue.length > 0) {
+    const node = queue.shift();
+    if (!visited.has(node)) {
+      console.log(node);
+      visited.add(node);
+    }
+    const neighbors = graph.get(node);
+    for (const neighbor of neighbors) {
+      if (!visited.has(neighbor)) {
+        queue.push(neighbor);
+      }
+    }
+  }
+};
+
+//console.log(bfs(graph, "A"));
+
+const dfs = (graph, node, visited = new Set()) => {
+
+  if (!visited.has(node)) {
+    console.log(node);
+    visited.add(node);
+  }
+
+  const neighbors = graph.get(node);
+
+  for (const neighbor of neighbors) {
+    if (!visited.has(neighbor)) {
+      dfs(graph, neighbor, visited);
+    }
+  }
+};
+
+console.log(dfs(graph, "F"));
