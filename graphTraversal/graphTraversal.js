@@ -85,7 +85,7 @@ const bfs = (start) => {
       //console.log(destination);
       if (destination === "BKK") {
         //check to see if current node is one we are looking for
-        console.log("Found it!");
+        console.log(`Found it in: ${visited.size} steps.`);
       }
       if (!visited.has(destination)) {
         // if Set does not contain the destination
