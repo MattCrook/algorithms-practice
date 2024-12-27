@@ -14,7 +14,6 @@ let targetSum = 3
 */
 //**************************************************************//
 
-
 //******************** BRUTE FORCE ************************//
 // A naive approach to this problem would be to loop through each number
 // and then loop again through the array looking for a pair that sums to "target_sum".
@@ -41,7 +40,12 @@ function twoSumBruteForce(arr, target_sum) {
 console.log(twoSumBruteForce([3, 5, 2, -4, 8, 11], 7));
 console.log("------------------");
 
-//************** HashTable/ HashMap **********************//
+//************************** HashTable/ HashMap **********************//
+//   - (2) Solutions here, each with a slightly different way of checking if number,
+//   - exists in the HashTable to find a matching pair.
+//     - First with converting the type to String.
+//     - Second using the "in" operator for JS objects.
+//
 /*
 We can write a faster algorithm that will find pairs that sum to target_sum in linear time.
 The algorithm below makes use of hash tables which have a constant lookup time.
@@ -56,7 +60,7 @@ We only need to loop through the array once, resulting in a running time of O(n)
 (3) The next element is 1.
   - We check to see if the sum minus the current element exists in the hash table. 6 - 1 = 5 does exist in the hash table so we found a pair.
 */
-//************************//
+//*****************************************************//
 function twoSumHashTable(arr, target_sum) {
   var sums = [];
   var hashTable = {};
@@ -83,13 +87,36 @@ function twoSumHashTable(arr, target_sum) {
 console.log(twoSumHashTable([4, 5, 1, 8], 6));
 console.log("----------------");
 
+// *************** //
+function twoSumHashTable_2(arr, target) {
+  const hashMap = {};
+  let pairs = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    const compliment = target - arr[i];
+    if (compliment in hashMap) {
+      pairs.push([arr[i], compliment]);
+    }
+    hashMap[arr[i]] = arr[i];
+  }
+
+  return pairs;
+}
+
+console.log(twoSumHashTable([4, 5, 1, 8], 6));
+console.log("----------------");
+
 // ********** Another way Using HashMap/ HashTable (and ES6 arrow function) *********//
-// *******************************//
+//   - Note - Returns INDEX(s) of matches in the array, rather than the numbers themselves.
+// ***************************************************************************//
 const twoSumHashmap = (numbers, target) => {
   // Create oject to hold the pair ids
   //  - we will be checking against this object
   // - checking if our target minus the current pair id is in this object, otherwise adding it.
   const numberPairIds = {};
+
+  // Array to hold the Indexes of the pairs we found.
+  let pairIndexes = [];
 
   // For loop to loop through the array of numbers passed in.
   for (let i = 0; i < numbers.length; i++) {
@@ -103,7 +130,7 @@ const twoSumHashmap = (numbers, target) => {
     //   - Until the calculated compliment (7 for example) is found.
     if (compliment in numberPairIds) {
       // if compliment (7) is found in numberPairIds{}, return the current index(i), and the index at which it found the compliment(numberPairIds[compliment]).
-      return [i, numberPairIds[compliment]];
+      pairIndexes.push([i, numberPairIds[compliment]]);
     }
     // property assignment to numberPairIds{object}
     // adding the current iteration (i), to numberPairIds{object} with key numberPairIds[num].
@@ -112,9 +139,148 @@ const twoSumHashmap = (numbers, target) => {
     //     - numberPairIds[num] = i ==> numberPairIds = {2 : 0}}
     numberPairIds[num] = i;
   }
+  return pairIndexes;
 };
 
 console.log("solution: ", twoSumHashmap([2, 7, 11, 15], 9));
 console.log("solution: ", twoSumHashmap([3, 2, 4], 6));
 console.log("solution: ", twoSumHashmap([3, 3], 6));
 console.log("--------------------------");
+
+//*************************************************//
+// Class object with same solutions as above.
+// Just added together under a Class for conciseness.
+//*************************************************//
+class TwoSum {
+  bruteForce(arr, target_sum) {
+    let sums = [];
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] + arr[j] === target_sum) {
+          sums.push([arr[i], arr[j]]);
+        }
+      }
+    }
+    return sums;
+  }
+
+  hashTable(arr, target_sum) {
+    let sums = [];
+    let hashTable = [];
+    for (let i = 0; i < arr.length; i++) {
+      let num = arr[i];
+      let compliment = target_sum - num;
+      if (hashTable[compliment.toString()] !== undefined) {
+        sums.push([arr[i], compliment]);
+      }
+      hashTable[num.toString()] = num;
+    }
+    return sums;
+  }
+
+  hashTable_2(arr, target_sum) {
+    const hashMap = {};
+    let pairs = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      const compliment = target_sum - arr[i];
+      if (compliment in hashMap) {
+        pairs.push([arr[i], compliment]);
+      }
+      hashMap[arr[i]] = arr[i];
+    }
+
+    return pairs;
+  }
+
+  pairIndexes(arr, target_sum) {
+    const numberPairIds = {};
+    let pairIndexes = [];
+    for (let i = 0; i < arr.length; i++) {
+      const num = arr[i];
+      const compliment = target_sum - num;
+      if (compliment in numberPairIds) {
+        pairIndexes.push([i, numberPairIds[compliment]]);
+      }
+      numberPairIds[num] = i;
+    }
+    return pairIndexes;
+  }
+}
+
+const array = [2, 5, 8, 3, -2, 9, 0];
+const targetSum = 3;
+
+const twoSum = new TwoSum();
+console.log("Brute Force: ", twoSum.bruteForce(array, targetSum)); // [ [ 5, -2 ], [ 3, 0 ] ]
+console.log("Hash Table", twoSum.hashTable(array, targetSum)); // [ [ -2, 5 ], [ 0, 3 ] ]
+console.log("Hash Table 2", twoSum.hashTable_2(array, targetSum)); // [ [ -2, 5 ], [ 0, 3 ] ]
+console.log("Matching Pairs Induces", twoSum.pairIndexes(array, targetSum)); // [ [ 4, 1 ], [ 6, 3 ] ]
+console.log("--------------------------");
+
+// ****************************************************************** //
+/*
+TWO SUM II - Input Array Is Sorted
+
+Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.
+Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
+- Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
+
+
+Example 1:
+Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
+
+Example 2:
+Input: numbers = [2,3,4], target = 6
+Output: [1,3]
+
+Example 3:
+Input: numbers = [-1,0], target = -1
+Output: [1,2]
+// ****************************************************************** //
+*/
+
+// ************** SOLUTION #1 ******************* //
+// - Two Sum Using the two-pointer method.
+// ******************** //
+const twoSumTwoPointer = (numbers, target) => {
+  let left = 0;
+  let right = numbers.length - 1;
+  while (left < right) {
+    let sum = numbers[left] + numbers[right];
+    if (sum === target) {
+      return [left + 1, right + 1]; //return induces added by 1 (per instructions)
+    }
+    if (sum < target) {
+      left = left + 1;
+    } else {
+      right = right - 1;
+    }
+  }
+};
+
+console.log(twoSumTwoPointer([2, 7, 11, 15], 9));
+console.log(twoSumTwoPointer([2, 3, 4], 6));
+console.log(twoSumTwoPointer([-1, 0], -1));
+console.log("---------------------");
+
+// ****************** Solution 2 ****************//
+// - Two Sum Using an Object (dictionary) to store values we've already calculated (memoization).
+// ******************************************* //
+const twoSumDictionary = (numbers, target) => {
+  const dict = {};
+  for (let i = 0; i < numbers.length; i++) {
+    const num = numbers[i];
+    const compliment = target - num;
+    if (compliment in dict) {
+      return [dict[compliment] + 1, i + 1]; //return induces added by 1 (per instructions)
+    }
+    dict[num] = i;
+  }
+};
+
+console.log(twoSumDictionary([2, 7, 11, 15], 9));
+console.log(twoSumDictionary([2, 3, 4], 6));
+console.log(twoSumDictionary([-1, 0], -1));
+console.log("---------------------");

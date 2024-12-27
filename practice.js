@@ -1,87 +1,44 @@
 /*
-# Example Graph:
-#      A
-#     / \
-#    B   C
-#   / \   \
-#  D   E   F
-# This graph can be represented as an adjacency list.
+One of the many popular algorithms is the Two Sum Algorithm.
+Given an array of numbers and a stand alone number, return all combinations of numbers in the array that add up to the stand alone number.
+Although any approach that works is technically a solve, but Big O determines which is the best answer for your application.
 
+Take the following example:
 
-# Find all nodes connected to each node. 
-# E.g. 
-#  - A is connected to A, B, C, D, E, F
-#  - B is connected to A, D, E
-#  - C is connected to A, F
-#  - D is connected to B
-#  - E is connected to B
-#  - F is connected to C
+let array = [2,5,8,3,-2,9,0]
+let targetSum = 3
 
-1) Create Adjacency List To represent Graph
-2) Find all connected Nodes per each node (node passed in, output all connected nodes.)
-
-Example 1.
-# Input A
-# Output: A B C D E F
+- The array of numbers we’re working with is 2,5,8,3,-2,9,0.
+- We need to find the number combinations that we’ll equal 3, our “targetSum”.
 */
+const array = [2, 5, 8, 3, -2, 9, 0];
+const targetSum = 3;
 
-const nodes = ["A", "B", "C", "D", "E", "F"];
-const edges = [
-  ["A", "B"],
-  ["A", "C"],
-  ["B", "D"],
-  ["B", "E"],
-  ["C", "F"],
-];
-
-const graph = new Map();
-
-nodes.forEach((node) => {
-  graph.set(node, []);
-});
-
-edges.forEach((edge) => {
-  graph.get(edge[0]).push(edge[1]);
-  graph.get(edge[1]).push(edge[0]);
-});
-
-console.log("Adjacency List:");
-console.log(graph);
-
-const bfs = (graph, start) => {
-  const visited = new Set();
-  const queue = [start];
-  while (queue.length > 0) {
-    const node = queue.shift();
-    if (!visited.has(node)) {
-      console.log(node);
-      visited.add(node);
-    }
-    const neighbors = graph.get(node);
-    for (const neighbor of neighbors) {
-      if (!visited.has(neighbor)) {
-        queue.push(neighbor);
+function twoSumBruteForce(arr, target_sum) {
+  let sums = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[i] + arr[j] === target_sum) {
+        sums.push([arr[i], arr[j]]);
       }
     }
   }
-};
+  return sums;
+}
 
-//console.log(bfs(graph, "A"));
+//console.log(twoSumBruteForce(array, targetSum));
 
-const dfs = (graph, node, visited = new Set()) => {
-
-  if (!visited.has(node)) {
-    console.log(node);
-    visited.add(node);
-  }
-
-  const neighbors = graph.get(node);
-
-  for (const neighbor of neighbors) {
-    if (!visited.has(neighbor)) {
-      dfs(graph, neighbor, visited);
+const twoSum = (arr, target) => {
+  const hashMap = {}
+  let pairs = [];
+  for (let i = 0; i < arr.length; i++) {
+    const compliment = target - arr[i];
+    if (compliment in hashMap) {
+      pairs.push([arr[i], compliment])
     }
+    hashMap[arr[i]] = arr[i];
   }
+  return pairs;
 };
 
-console.log(dfs(graph, "F"));
+console.log(twoSum(array, targetSum));

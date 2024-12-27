@@ -1,10 +1,27 @@
 #########################################################
 # THREE SUM
-#
-# (Also see /challenges/ folder for more examples.)
+# The Three Sum problem involves finding unique triplets of numbers in an array that sum up to a given target. 
+# Solve it efficiently by building on top of the Two Sum problem and applying sorting and hashing approaches. 
+
+
+# - Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+# - Notice that the solution set must not contain duplicate triplets.
+
+# Example 1:
+# Input: nums = [-1,0,1,2,-1,-4]
+# Output: [[-1,-1,2],[-1,0,1]]
+# Notice that the order of the output and the order of the triplets does not matter.
+
+# Example 2:
+# Input: nums = [0,1,1]
+# Output: []
+
+# Example 3:
+# Input: nums = [0,0,0]
+# Output: [[0,0,0]]
 #########################################################
 
-#------------ BRUTE FORCE ------------------#
+#------------ SOLUTION #1 - BRUTE FORCE ------------------#
 # When approaching an algorithms problem, particularly when thinking about the brute force approach, 
 # it is often easiest to start by thinking about how you would solve a given problem if you were to solve it by hand. 
 #
@@ -29,7 +46,7 @@ print(threeSumBruteForce([7, 4, -7, 0]))
 print("-------------------")
 
 
-#------------ BETTER SOLUTION USING HASHMAP ------------------#
+#------------ SOLUTION #2 - BETTER SOLUTION USING HASHMAP ------------------#
 # Time/Space Complexity
 #  - Time Complexity: O(n²)
 #  - Space Complexity: O(n²)
@@ -67,7 +84,7 @@ print("-------------------")
 
 
 
-#----------------- SORTING, ITERATING, AND TWO POINT--------------#
+#----------------- SOLUTION #3 - SORTING, ITERATING, AND TWO POINT--------------#
 # In this case we can design an algorithm that combines both of the approaches above. 
 # - We first sort the array, then iterate over it (index I), placing two pointers (L and R) at the beginning and end of the other already-sorted numbers.
 # - To iterate the two pointers, we can conditionally moving either the left or right pointer based on whether the current triplet sum is larger or smaller than zero. 

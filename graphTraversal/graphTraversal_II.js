@@ -65,6 +65,8 @@ edges.forEach((edge) => {
 
 console.log("Adjacency List:");
 console.log(graph);
+console.log("----------------------");
+
 /*
 Adjacency List:
 Map(6) {
@@ -98,6 +100,7 @@ const bfs = (graph, start) => {
 console.log(bfs(graph, "A"));
 console.log(bfs(graph, "B"));
 console.log(bfs(graph, "F"));
+console.log("----------------------");
 
 //********************* DFS ******************//
 const dfs = (graph, node, visited = new Set()) => {
@@ -117,3 +120,64 @@ const dfs = (graph, node, visited = new Set()) => {
 console.log(dfs(graph, "A"));
 console.log(dfs(graph, "B"));
 console.log(dfs(graph, "F"));
+console.log("----------------------");
+
+//*************************************************//
+// Class object with same solutions as above.
+// Just added together under a Class for conciseness.
+//*************************************************//
+class GraphTraversal {
+  bfs(graph, start) {
+    const visited = new Set();
+    const queue = [start];
+    while (queue.length > 0) {
+      const node = queue.shift();
+      if (!visited.has(node)) {
+        console.log(node);
+        visited.add(node);
+      }
+      const neighbors = graph.get(node);
+      for (const neighbor of neighbors) {
+        if (!visited.has(neighbor)) {
+          queue.push(neighbor);
+        }
+      }
+    }
+  }
+
+  dfs(graph, node, visited = new Set()) {
+    if (!visited.has(node)) {
+      console.log(node);
+      visited.add(node);
+    }
+    const neighbors = graph.get(node);
+    for (const neighbor of neighbors) {
+      if (!visited.has(neighbor)) {
+        dfs(graph, neighbor, visited);
+      }
+    }
+  }
+}
+
+function createAdjList(nodes, edges) {
+  const graph = new Map();
+
+  nodes.forEach((node) => {
+    graph.set(node, []);
+  });
+
+  edges.forEach((edge) => {
+    graph.get(edge[0]).push(edge[1]);
+    graph.get(edge[1]).push(edge[0]);
+  });
+
+  return graph;
+}
+
+const adjList = createAdjList(nodes, edges);
+
+const solution = new GraphTraversal();
+
+console.log(solution.bfs(adjList, "B")); // B, A, D, E, C, F
+console.log(solution.dfs(adjList, "B")); // B, A, C, F, D, E
+console.log("----------------------");

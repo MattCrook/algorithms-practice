@@ -17,8 +17,6 @@
 # Input: nums = [3,3], target = 6
 # Output: [0,1]
 #------------------------------------------------#
-
-
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -44,20 +42,12 @@ print("solution: ", solution_class.twoSum([3,3], 6))
 print("--------------------------")
 
 def two_sum(nums, target):
-    # Dictionary to store the number and its index
     num_map = {}
-    # Iterate over the list
     for i, num in enumerate(nums):
-        # Calculate the complement of the current number
         complement = target - num
-        # Check if the complement exists in the map
         if complement in num_map:
-            # Return the indices of the complement and the current number
-            # pick off the compliment and return the index of that.
             return [num_map[complement], i]
-        # Otherwise, store the current number and its index
         num_map[num] = i
-    # If no solution is found, return an empty list (this shouldn't happen as per the problem description)
     return []
 
 nums1 = [2,7,11,15]
@@ -76,28 +66,23 @@ print("--------------------------")
 
 class TwoSum:
     def __init__(self):
-        # Initialize an empty dictionary to store number and its index
         self.num_map = {}
 
     def add(self, number: int):
-        # Store the number and its index in the map
         self.num_map[number] = self.num_map.get(number, 0) + 1
 
     def find(self, target: int):
-        # Iterate over the stored numbers to check for complement
         for num in self.num_map:
             complement = target - num
-            # Check if complement exists and is not the same number (or it appears more than once)
             if complement in self.num_map:
                 if complement != num or self.num_map[num] > 1:
                     return [num, complement]
         return None
 
-two_sum = TwoSum()  # Instantiate the object
-two_sum.add(2)      # Add number 2 to the map
-two_sum.add(7)      # Add number 7 to the map
-two_sum.add(11)     # Add number 11 to the map
-two_sum.add(15)     # Add number 15 to the map
+two_sum.add(2)
+two_sum.add(7)
+two_sum.add(11)
+two_sum.add(15)
 
 result = two_sum.find(9)  # Try to find two numbers that sum to 9
 print("TwoSum Class:", result)  # Output: [2, 7]

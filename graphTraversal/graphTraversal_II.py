@@ -86,8 +86,8 @@ def bfs(graph, start):
     queue = [start]  # Initialize queue with start node
     #queue = deque([start])  # Initialize queue with start node
 
-    while queue:
-        node = queue.popleft()  # Dequeue a node
+    #while queue:
+        #node = queue.popleft()  # Dequeue a node
 
     while len(queue) > 0:
         node = queue.pop(0)  # Dequeue a node
@@ -142,4 +142,60 @@ print("DFS Traversal:")
 dfs(graph, 'A')  # Output: A B D E C F
 dfs(graph, 'B')  # Output: B A C F D E
 dfs(graph, 'F')  # Output: F C A B D E
+print("--------------------")
+
+
+#---------------------------------------------------------------#
+#---------------------------------------------------------------#
+
+class GraphTraversal(object):
+    '''
+    Class object with same solutions as above.
+    Just added together under a Class for conciseness.
+    '''
+    def dfs(self, graph, node, visited=None):
+      if visited is None:
+        visited = set()
+      if node not in visited:
+        print(node)
+        visited.add(node)
+      for neighbor in graph[node]:
+        if neighbor not in visited:
+          self.dfs(graph, neighbor, visited)
+
+    def bfs(self, graph, start):
+      visited = set()
+      queue = [start]
+      while len(queue) > 0:
+        node = queue.pop(0)
+        if node not in visited:
+          print(node)
+          visited.add(node)
+          for neighbor in graph[node]:
+            if neighbor not in visited:
+              queue.append(neighbor)
+
+
+
+def createAdjList(nodes, edges):
+    '''
+    Function to create our adjacency list.
+    '''
+    adj_list = dict()
+
+    for n in nodes:
+      adj_list[n] = []
+
+    for edge in edges:
+      adj_list.get(edge[0]).append(edge[1])
+      adj_list.get(edge[1]).append(edge[0])
+
+    return adj_list
+
+adjList = createAdjList(nodes, node_connections)
+
+
+solution = GraphTraversal()
+print(solution.dfs(adjList, "B")) # B, A, C, F, D, E
+print(solution.bfs(adjList, "B")) # B ,A ,D ,E ,C ,F
 print("--------------------")

@@ -1,19 +1,17 @@
-# find bb
-# in
-# abbc 
-# a**bb**c
+################################################
+# Find given target, other wise replace with asterisk.
+#
+# - find bb in abbc, and covert it to a**bb**c.
+#
+# - find cd in adcdef and convert it to a**d**cd**e**f
 
-# find cd
-# in
-# adcdef
-# a**d**cd**e**f
+###################################################
 
 callsign_01 = "abbc"
 callsign_02 = "adcdef"
 
 
-# Super simple
-# find target, other wise replace with asterisk
+
 class Solution(object):
   def solution_01(self, callsigns, target):
       new_callsigns = []
@@ -26,7 +24,10 @@ class Solution(object):
               else:
                   new_callsigns.append("*")
       return ''.join(new_callsigns)
-  
+
+
+
+
 #   def solution_02(self, callsign, target):
     #   solution = []
     #   if target not in callsign:

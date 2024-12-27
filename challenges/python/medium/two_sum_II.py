@@ -5,7 +5,6 @@
 # Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.
 
 # Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.
-# The tests are generated such that there is exactly one solution. You may not use the same element twice.
 # Your solution must use only constant extra space.
 
 # Example 1:
@@ -76,32 +75,19 @@ class Solution(object):
 
     # binary search #2
     def twoSumBinarySearch2(self, numbers, target):
-        "O(n(log(n)) time complexity and O(1) space"
+        """
+        O(n(log(n)) time complexity and O(1) space
+        """
         n = len(numbers)
-
         for i in range(n):
-            # assign vars to left and right values. (min and max)
-            #  - ("pythonic"): left, right = i+1, n-1
-            # left is min most value we can have (current index of iteration)
-            # right is max we can have which is total len of array.
             left = i + 1
             right = n - 1
-            # perform binary search
             while left < right:
-                # mid is getting the middle or average of array for a starting point
                 mid = (left + right) // 2
-                # if value at i in numbers, plus value at mid in numbers is greater than our target,
-                # then re-assign the right value to mid.
-                # B/c, if they don't both add up to target, it is not a match.
-                # Therefor if too high, we need to assign mid to lower value, and can disregard anything higher than that.
                 if numbers[i] + numbers[mid] >= target:
                     right = mid
                 else:
-                    # else numbers[i]+numbers[mid] <= than target...
-                    # So reassign left to mid. (plus 1, otherwise get stuck in an infinite loop)
                     left = mid + 1
-                # final check if value in "numbers" at "left" index plus value at "numbers" at "i" equals our target,
-                # return current index "i", and "left", plus 1 per instructions for 1-indexed array.
                 if numbers[left] + numbers[i] == target:
                     return [i + 1, left + 1]
 
@@ -152,37 +138,19 @@ class SolutionHashmap(object):
         # 2 number added to specific target
         # indexes + 1
         """
-        # Set to hold numbers already visited. Unordered and unique.
         visited = {}
-        # number to represent the length of the numbers list passed in.
         len_numbers = len(numbers)
 
-        # simple for loop over range of len_numbers
-        # range() function gives a sequence of numbers (starting from 0 by default) and increments by 1 (by default), until a specified number is reached.
-        # gives, starting index (0), to last index. (e.g. (0, 4) in first example.)
         for i in range(len_numbers):
-            # assigning value of current index in loop to temp var.
             num = numbers[i]
-            # assigning what we are looking for to variable...
-            # - doing (target - num) b/c math...if the two numbers add up to the target,
-            # - then we can assume the target minus the current number equals the other number.
-            #   - e.g: 9 - 2 = 7, 9 - 7 = 2...
             guess = target - num
             if guess in visited:
-                # first, check to make sure the value (guess) is not already in the Set "visited".
-                # if not, then add it to visited, adding the INDEX where it found the match, then plus 1 to adhere to a 1-indexed array.
-                # - e.g. in example 1, first past guess = 7 (9 - 2), second pass guess = 2 (9 -7 )
-                #   - 7 is in visited, so 2 is a match at first index, so visited[guess] = 0. But + 1 = 1
                 indexI = visited[guess] + 1
                 indexJ = i + 1
                 return [indexI, indexJ]
             if num not in visited:
-                # if num (value of current index) not in Set "visited", add it.
-                # e.g: visited = {} -> visited = {2: 0}
                 visited[num] = [i]
             else:
-                # clean up/ edge case num not in visited and haven't found guess
-                # increment current value at the current index.
                 visited[num] += [i]
 
         return []
@@ -221,7 +189,7 @@ print("---------------------------")
 #------------------------------------------------#
 # Another way to do it with binary search
 #------------------------------------------------#
-class Solution_2(object):
+class Solution_3(object):
     def twoSum(self, array, target):
         i = 0
         j = len(array) -1
@@ -235,7 +203,7 @@ class Solution_2(object):
                 return [i+1, j+1]
         return []
 
-solution2 = Solution_2()
-print(solution2.twoSum([2, 7, 11, 15], 9));
-print(solution2.twoSum([2,3,4], 6));
-print(solution2.twoSum([-1, 0], -1));
+solution_3 = Solution_3()
+print(solution_3.twoSum([2, 7, 11, 15], 9));
+print(solution_3.twoSum([2,3,4], 6));
+print(solution_3.twoSum([-1, 0], -1));

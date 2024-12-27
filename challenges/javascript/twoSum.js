@@ -22,30 +22,14 @@
 
 // Using HASHMAP solution
 function twoSumHashmap(numbers, target) {
-  // Create oject to hold the pair ids
-  //  - we will be checking against this object
-  // - checking if our target minus the current pair id is in this object, otherwise adding it. 
   const numberPairIds = {};
-
-  // For loop to loop through the array of numbers passed in.
   for (let i = 0; i < numbers.length; i++) {
-    // saving off value of current iteration, in numbers array.
     const num = numbers[i];
-    // Calculating the complement of the current number.
+
     const compliment = target - num;
-    // - For example: 9(target) - 2(num) = 7(compliment).
-    //  - 7 is then added to numberPairIds{}
-    //   - this continues, adds the num (2) to the numberPairIds{}, at index i.
-    //   - Until the calculated compliment (7 for example) is found.
     if (compliment in numberPairIds) {
-      // if compliment (7) is found in numberPairIds{}, return the current index(i), and the index at which it found the compliment(numberPairIds[compliment]).
       return [i, numberPairIds[compliment]];
     }
-    // property assignment to numberPairIds{object}
-    // adding the current iteration (i), to numberPairIds{object} with key numberPairIds[num].
-    // - using bracket ("[]"") property assignment b/c in JS have to if using dynamic property names (e.g., variables) or property names that are not valid JavaScript identifiers (e.g numbers..)
-    //   - for example, if numberPairIds = {}, num = 2, i = 0
-    //     - numberPairIds[num] = i ==> numberPairIds = {2 : 0}}
     numberPairIds[num] = i;
   }
 }
