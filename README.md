@@ -12,27 +12,75 @@ Collection of coding algorithms and data structures, written in Javascript and P
 
 ##### Algorithms / Data Structures Include:
 * Graph Traversal
-* LinkedList
-* Fizzbuzz
-* Various Counting Algorithms
-* Various Shuffling Algorithms
-* Finding Sums of Integers
-* String Manipulation
-* Sorting Algorithms
-* Searching Algorithms
-* Fibonacci Sequence
+* LinkedList Algorithms
+* Stacks
+* Queues
+* Two Sum Algorithm
+* Three Sum Algorithm
 * Binary Search Algorithm
 * Circular Buffer Algorithms
+* Fizzbuzz
+* Counting Algorithms
+* Shuffling Algorithms
+* Sorting Algorithms
+* Searching Algorithms
+* Finding Sums of Integers
+* String Manipulation
+* Fibonacci Sequence
 * and more...
 * [Challenges](./challenges/)
 
-### Extra/ Random / Docs:
+#### Extra/ Random / Docs:
+
 ##### Python:
 - https://github.com/heineman/python-data-structures
 - https://docs.python.org/3/library/collections.html#deque-recipes
 - https://www.codecademy.com/resources/blog/advanced-python-code-challenges/
 
 <br>
+
+## Algorithm Space and Time Complexity and Big O Notation
+
+In computer science algorithms, there is something called the “Big O Notation”. It primarily looks at how many operations a sorting algorithm takes to completely sort a very large collection of data. This is a measure of efficiency and is how you can directly compare one algorithm to another. All algorithms can be measured by this, in ***Time Complexity*** and ***Space Complexity***.
+
+It is important to note that there *is no single algorithm that is fastest in all cases*, as data can be input into a program in all manners of states. And the approaches of each algorithm will have a best case and worst case scenario where they perform at their best or worst. So it is the programmers job (and your job in an interview for example) to leverage the best implementation to find the desired solution.
+
+##### *Code Examples: [spaceAndTimeComplexity.js](./complexity/spaceAndTimeComplexity.js)*
+
+##
+
+***Time complexity*** is concerned with how the running time of an algorithm or function grows as the size of the input increases. We analyze the time complexity by counting the number of basic operations or steps the function performs, and then express that in Big-O notation.
+
+***Space complexity*** is concerned with how much memory (space) an algorithm uses as a function of the input size. This includes the space used by variables, data structures, function call stacks, and so on.
+
+![big-o](./media/bigO.png)
+
+Measuring Time and Space Complexity:
+
+* Time Complexity: Focus on the loops, recursive calls, and nested operations. A good rule of thumb is:
+  * Single loop: O(n)
+  * Nested loops: O(n²), O(n³), etc.
+  * Recursion depth: O(log n), O(n), depending on how the problem is divided.
+
+* Space Complexity: Focus on extra space used, including:
+  * Additional variables or data structures (arrays, dictionaries, etc.).
+  * Space used by recursion (call stack depth).
+  * Note that input data size is usually not counted unless we explicitly modify or store a large copy of the input.
+
+In summary:
+
+* Time complexity is measured by counting the number of operations relative to the input size.
+* Space complexity is measured by considering how much extra memory the function uses.
+
+![sorting-algorithms](./media/sorting_algorithms.png)
+
+<br>
+
+*More details: https://www.freecodecamp.org/news/all-you-need-to-know-about-big-o-notation-to-crack-your-next-coding-interview-9d575e7eec4/*
+
+##
+
+
 
 <!-- ## Graph Search (BFS and DFS)
 
