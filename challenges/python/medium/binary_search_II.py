@@ -147,3 +147,29 @@ def check_numbers_in_sorted_array(sorted_array, target_list):
 
 print(check_numbers_in_sorted_array([0, 1, 1, 2, 5, 7, 9, 9, 10], [5, 3, 8, 7]))
 print("--------------")
+
+
+#-------------------- SOLUTION 04: RECURSION -------------------#
+# Using method of Solution #3 of combining into (1) Function.
+# But solving Binary Search using a recursive function.
+#----------------------------------------------------#
+def check_numbers_in_sorted_array_recursion(sorted_array, target_list):
+    def do_binary_search_rec(arr, target, minn, maxx):
+        if minn > maxx:
+            return False
+        mid = (minn + maxx) // 2
+        if (mid == target):
+            return True
+        if arr[mid] < target:
+            return do_binary_search_rec(arr, target, mid + 1, maxx)
+        else:
+            return do_binary_search_rec(arr, target, minn, mid - 1)
+
+    results = []
+    for target in target_list:
+        results.append("Y" if do_binary_search_rec(sorted_array, target, 0, len(sorted_array) - 1) else "N")
+
+    return results
+
+print(check_numbers_in_sorted_array_recursion([0, 1, 1, 2, 5, 7, 9, 9, 10], [5, 3, 8, 7]))
+print("--------------")
