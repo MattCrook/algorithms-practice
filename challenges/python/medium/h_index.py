@@ -20,35 +20,28 @@ citations_01 = [3,0,6,1,5]
 citations_02 = [1,3,1]
 
 #------------ SOLUTION #1 ----------------#
-'''
-Intuition
-The h-index is a metric to evaluate the impact of a researcher's publications. It is defined as the maximum value h such that the researcher has published at least h papers that have each been cited at least h times.
-The problem can be solved by sorting the array and iterating through it to check where the condition is satisfied.
+# The h-index is a metric to evaluate the impact of a researcher's publications. It is defined as the maximum value h such that the researcher has published at least h papers that have each been cited at least h times.
+#  - The problem can be solved by sorting the array and iterating through it to check where the condition is satisfied.
+# Key idea: After sorting the array, the number of papers with citations greater than or equal to a certain value can be easily determined using their index.
 
-Key idea: After sorting the array, the number of papers with citations greater than or equal to a certain value can be easily determined using their index.
+# Approach
+#  - Sort the citations array:
+#  - This organizes the citation counts in ascending order, making it easier to check the number of papers with citations ≥ h.
 
-Approach
-Sort the citations array:
-This organizes the citation counts in ascending order, making it easier to check the number of papers with citations ≥ h.
+# Iterate through the sorted array:
+#  - For each citation at index i, calculate the number of papers with citations greater than or equal to the current value. 
+#  - This is given by citations.size() - i (in C++ terms) or citations.length - i (in other languages).
 
-Iterate through the sorted array:
+# Check two cases:
+#  - If the citation count at the current index (citations[i]) is less than or equal to the number of papers (citations.length - i), update h_ind as the maximum of its current value and the citation count.
+#  - Otherwise, calculate the h-index using the number of remaining papers (citations.length - i).
 
-For each citation at index i, calculate the number of papers with citations greater than or equal to the current value. This is given by citations.size() - i (in C++ terms) or citations.length - i (in other languages).
+# Return the maximum h_ind value:
+# - This value represents the highest h-index that satisfies the condition for the given array of citations.
 
-Check two cases:
-
-If the citation count at the current index (citations[i]) is less than or equal to the number of papers (citations.length - i), update h_ind as the maximum of its current value and the citation count.
-Otherwise, calculate the h-index using the number of remaining papers (citations.length - i).
-
-Return the maximum h_ind value:
-
-This value represents the highest h-index that satisfies the condition for the given array of citations.
-
-Complexity
-Time complexity: O(nlog n)
-
-Space complexity: O(1)
-'''
+# Complexity
+#  - Time complexity: O(nlog n)
+#  - Space complexity: O(1)
 #-----------------------------------------#
 class Solution(object):
     def hIndex(self, citations):
