@@ -21,7 +21,8 @@
 
 
 #------------ SOLUTION #1 ----------------#
-# The h-index is a metric to evaluate the impact of a researcher's publications. It is defined as the maximum value h such that the researcher has published at least h papers that have each been cited at least h times.
+# The h-index is a metric to evaluate the impact of a researcher's publications.
+# It is defined as the maximum value h such that the researcher has published at least h papers that have each been cited at least h times.
 #  - The problem can be solved by sorting the array and iterating through it to check where the condition is satisfied.
 # Key idea: After sorting the array, the number of papers with citations greater than or equal to a certain value can be easily determined using their index.
 #
@@ -65,7 +66,8 @@ print("----------------------------")
 
 
 #------------ SOLUTION #2 ----------------#
-# - One-liner
+# One-liner
+# - May not be the bet solution in an interview but can do it in one line.
 # ----------------------------------------#
 class Solution_02(object):
     def hIndex(self, citations):
