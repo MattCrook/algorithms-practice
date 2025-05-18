@@ -80,6 +80,23 @@ In summary:
 
 ##
 
+#### Top 15 Patterns
+
+- Prefix Sum
+- Two Pointers
+- Sliding Window
+- Fast and Slow Pointers
+- LinkedList in-place Reversal
+- Monotonic Stack
+- Top 'K' Elements
+- Overlapping Intervals
+- Modified Binary Search
+- Binary Tree Traversal
+- Depth-First Search (DFS)
+- Breadth-First Search (BFS)
+- Matrix Traversal
+- Backtracking
+- Dynamic Programming Patterns
 
 
 <!-- ## Graph Search (BFS and DFS)

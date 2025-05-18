@@ -48,16 +48,18 @@ def two_sum(nums, target):
     # Dictionary to store the number and its index
     num_map = {}
     # Iterate over the list
-    for i, num in enumerate(nums):
+    for index, num in enumerate(nums):
+        # enumermate is required to loop over nums if using object syntax when looping... "i, num"
         # Calculate the complement of the current number
         complement = target - num
         # Check if the complement exists in the map
         if complement in num_map:
             # Return the indices of the complement and the current number
             # pick off the compliment and return the index of that.
-            return [num_map[complement], i]
+            return [num_map[complement], index]
+            # return {"compliment" : num_map[compliment], "index": index}
         # Otherwise, store the current number and its index
-        num_map[num] = i
+        num_map[num] = index
     # If no solution is found, return an empty list (this shouldn't happen as per the problem description)
     return []
 
@@ -139,15 +141,17 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        l, r = 0, len(numbers)-1
-        while l < r:
-            s = numbers[l] + numbers[r]
+        # left, right = 0, len(numbers)- 1
+        left = 0
+        right = len(numbers) - 1
+        while left < right:
+            s = numbers[left] + numbers[right]
             if s == target:
-                return [l+1, r+1]
+                return [left + 1, right + 1]
             elif s < target:
-                l += 1
+                left += 1
             else:
-                r -= 1
+                right -= 1
 
     # dictionary
     def twoSumDictionary(self, numbers, target):
@@ -163,28 +167,55 @@ class Solution(object):
             dic[num] = i
 
     # binary search
-    def twoSumBinarySearch(self, numbers, target):
+    def twoSumBinarySearch(self, nums, target):
         """
-        :type numbers: List[int]
+        :type nums: List[int]
         :type target: int
         :rtype: List[int]
         """
-        for i in range(len(numbers)):
-            l, r = i+1, len(numbers)-1
-            tmp = target - numbers[i]
-            while l <= r:
-                mid = l + (r-l)//2
-                if numbers[mid] == tmp:
-                    return [i+1, mid+1]
-                elif numbers[mid] < tmp:
-                    l = mid+1
+        # range returns an object that is sequence of integers from start top stop.
+        # For example, example 1 (nums = [2,7,11,15]) would be range(0, 4)
+        for i in range(len(nums)):
+            # i will be 0 indexed induces.
+            # for example, ex 1... 0, 1, 2, 3
+            # So for left, add 1 to get numbered index
+            # Left is i + 1, b/c our index 0, or current index of loop, will be nums[i] and what we are comparing against.
+            #--#
+            # "pythonic" way
+            # l, r = i + 1, len(nums) - 1
+            #---#
+            left = i + 1
+            right = len(nums) - 1
+            # nums[i] is current actual value of number in iteration.
+            # for example in ex 1....2 then 7 then 11 then 15
+            tmp = target - nums[i]
+            while left <= right:
+                # for example, in ex 1...first iteration...
+                # tmp = 7
+                # l = 1
+                # r = 3
+                # mid = 2
+                # "if 2 == 7" which does not, so
+                # 2 - 1
+                # new mid = 1
+                # 7 at index 1
+                # return (0+1), (1+1) => (1,2)
+                mid = left + (right - left) // 2
+                if nums[mid] == tmp:
+                    # return plus 1 as i and mid will be 0 indexed, so add one to give actual place in array.
+                    return [i + 1, mid + 1]
+                elif nums[mid] < tmp:
+                    left = mid + 1
                 else:
-                    r = mid-1
+                    right = mid - 1
+
 
     # binary search #2
-    def twoSumBinarySearch2(self, numbers, target):
+    # Note: Todo:
+    #  - Only works for first example ([2, 7, 11, 15], 9)
+    def twoSumBinarySearch2(self, nums, target):
         "O(n(log(n)) time complexity and O(1) space"
-        n = len(numbers)
+        n = len(nums)
 
         for i in range(n):
             # assign vars to left and right values. (min and max)
@@ -197,19 +228,19 @@ class Solution(object):
             while left < right:
                 # mid is getting the middle or average of array for a starting point
                 mid = (left + right) // 2
-                # if value at i in numbers, plus value at mid in numbers is greater than our target,
+                # if value at i in nums, plus value at mid in nums is greater than our target,
                 # then re-assign the right value to mid.
                 # B/c, if they don't both add up to target, it is not a match.
                 # Therefor if too high, we need to assign mid to lower value, and can disregard anything higher than that.
-                if numbers[i] + numbers[mid] >= target:
+                if nums[i] + nums[mid] >= target:
                     right = mid
                 else:
-                    # else numbers[i]+numbers[mid] <= than target...
+                    # else nums[i]+nums[mid] <= than target...
                     # So reassign left to mid. (plus 1, otherwise get stuck in an infinite loop)
                     left = mid + 1
-                # final check if value in "numbers" at "left" index plus value at "numbers" at "i" equals our target,
+                # final check if value in "nums" at "left" index plus value at "nums" at "i" equals our target,
                 # return current index "i", and "left", plus 1 per instructions for 1-indexed array.
-                if numbers[left] + numbers[i] == target:
+                if nums[left] + nums[i] == target:
                     return [i + 1, left + 1]
 
 
@@ -236,10 +267,12 @@ print("----------------------------------")
 # Using Hashmap
 #
 # Approach:
-# - Hash Map: Use a dictionary to keep track of the indices of the elements we have seen so far. This allows us to check in constant time whether the complement (i.e., target - num) of the current element exists in the list.
-#   - Iterate through the list: As we iterate through the list, for each element, we check if the complement exists in the dictionary. If it does, we have found our pair, and we return their indices. If not, we add the current element and its index to the dictionary.
+# - Hash Map: Use a dictionary to keep track of the indices of the elements we have seen so far. 
+#   - This allows us to check in constant time whether the complement (i.e., target - num) of the current element exists in the list.
+#   - Iterate through the list: As we iterate through the list, for each element, we check if the complement exists in the dictionary. 
+#   - If it does, we have found our pair, and we return their indices. If not, we add the current element and its index to the dictionary.
 #   - Return the result: If a pair is found, return their 1-based indices. If not, return an empty list.
-
+#
 # Complexity
 # - Time complexity:O(n), where:
 #   - n is the length of the input list.
@@ -279,7 +312,8 @@ class SolutionHashmap(object):
                 # if not, then add it to visited, adding the INDEX where it found the match, then plus 1 to adhere to a 1-indexed array.
                 # - e.g. in example 1, first past guess = 7 (9 - 2), second pass guess = 2 (9 -7 )
                 #   - 7 is in visited, so 2 is a match at first index, so visited[guess] = 0. But + 1 = 1
-                indexI = visited[guess] + 1
+                # (need to grab [0] otherwise get a type error..b/c visited[guess] = > [0]..and cant do [0] + 1)
+                indexI = visited[guess][0] + 1
                 indexJ = i + 1
                 return [indexI, indexJ]
             if num not in visited:

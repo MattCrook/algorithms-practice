@@ -1,4 +1,6 @@
-# ~ using to traverse by matrix antidiagonal (the second diagonal)
+################################# MATRIX TRAVERSAL #############################
+# Using ~ to traverse by matrix antidiagonal (the second diagonal)
+#######################################################################
 
 
 class Solution:

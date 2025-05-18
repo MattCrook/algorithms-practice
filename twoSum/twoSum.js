@@ -33,7 +33,7 @@ function twoSumBruteForce(arr, target_sum) {
     }
   }
 
-  // return all pairs of integers that sum to S
+  // return all pairs of integers that sum to S (7)
   return sums;
 }
 
@@ -103,7 +103,7 @@ function twoSumHashTable_2(arr, target) {
   return pairs;
 }
 
-console.log(twoSumHashTable([4, 5, 1, 8], 6));
+console.log(twoSumHashTable_2([4, 5, 1, 8], 6));
 console.log("----------------");
 
 // ********** Another way Using HashMap/ HashTable (and ES6 arrow function) *********//
@@ -113,7 +113,7 @@ const twoSumHashmap = (numbers, target) => {
   // Create oject to hold the pair ids
   //  - we will be checking against this object
   // - checking if our target minus the current pair id is in this object, otherwise adding it.
-  const numberPairIds = {};
+  const hashTable = {}; // numberPairIds
 
   // Array to hold the Indexes of the pairs we found.
   let pairIndexes = [];
@@ -125,19 +125,19 @@ const twoSumHashmap = (numbers, target) => {
     // Calculating the complement of the current number.
     const compliment = target - num;
     // - For example: 9(target) - 2(num) = 7(compliment).
-    //  - 7 is then added to numberPairIds{}
-    //   - this continues, adds the num (2) to the numberPairIds{}, at index i.
+    //  - 7 is then added to hashTable{}
+    //   - this continues, adds the num (2) to the hashTable{}, at index i.
     //   - Until the calculated compliment (7 for example) is found.
-    if (compliment in numberPairIds) {
-      // if compliment (7) is found in numberPairIds{}, return the current index(i), and the index at which it found the compliment(numberPairIds[compliment]).
-      pairIndexes.push([i, numberPairIds[compliment]]);
+    if (compliment in hashTable) {
+      // if compliment (7) is found in hashTable{}, return the current index(i), and the index at which it found the compliment(numberPairIds[compliment]).
+      pairIndexes.push([i, hashTable[compliment]]);
     }
-    // property assignment to numberPairIds{object}
-    // adding the current iteration (i), to numberPairIds{object} with key numberPairIds[num].
+    // property assignment to hashTable{object}
+    // adding the current iteration (i), to hashTable{object} with key hashTable[num].
     // - using bracket ("[]"") property assignment b/c in JS have to if using dynamic property names (e.g., variables) or property names that are not valid JavaScript identifiers (e.g numbers..)
-    //   - for example, if numberPairIds = {}, num = 2, i = 0
-    //     - numberPairIds[num] = i ==> numberPairIds = {2 : 0}}
-    numberPairIds[num] = i;
+    //   - for example, if hashTable = {}, num = 2, i = 0
+    //     - hashTable[num] = i ==> hashTable = {2 : 0}}
+    hashTable[num] = i;
   }
   return pairIndexes;
 };

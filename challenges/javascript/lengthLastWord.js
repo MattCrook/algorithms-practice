@@ -21,8 +21,11 @@
 //########################################################
 
 const lengthOfLastWord = (s) => {
+  // remove leading and trailing whitespace and 
+  // split a string into substrings using the specified separator and return them as an array.
   const words = s.trim().split(" ");
   const lastWord = words[words.length - 1];
+  // return last word, split each letter into strings in an array and return length of array.
   return lastWord.split("").length;
 };
 
